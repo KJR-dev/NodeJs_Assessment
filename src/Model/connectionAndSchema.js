@@ -30,7 +30,7 @@ connection.connect((err) => {
             console.log("Database used");
         });
 
-        connection.query("CREATE TABLE IF NOT EXISTS social_work_report (id INT AUTO_INCREMENT PRIMARY KEY, category ENUM('Education', 'Healthcare') NOT NULL , points INT NOT NULL, questions VARCHAR(500) NOT NULL, note VARCHAR(1000))", (err, res) => {
+        connection.query("CREATE TABLE IF NOT EXISTS social_work_report (id INT AUTO_INCREMENT PRIMARY KEY, category ENUM('Education', 'Healthcare') NOT NULL , points INT NOT NULL DEFAULT 0, questions VARCHAR(500) NOT NULL UNIQUE, note VARCHAR(1000))", (err, res) => {
             if (err) {
                 console.error('Error creating table: ' + err.stack);
                 return;
@@ -42,4 +42,4 @@ connection.connect((err) => {
 
 });
 
-module.exports = connection;
+module.exports = { connection };
